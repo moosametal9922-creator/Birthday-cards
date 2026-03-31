@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wishes!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff4a4a;
+            margin-bottom: 10px;
+        }
+        .gift-box {
+            font-size: 50px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .gift-box:hover {
+            transform: scale(1.1);
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff4a4a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #e04040;
+        }
+        .share-section {
+            margin-top: 20px;
+            display: none;
+        }
+        /* Ad Placement Boxes */
+        .ad-box {
+            background: #eee;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px dashed #999;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="ad-box">
+            [Aapka Google AdSense Code Yahan Aayega - Top Ad]
+        </div>
+
+        <h1>🎉 Wish Someone a Happy Birthday! 🎂</h1>
+        <div class="gift-box" onclick="showWish()">🎁</div>
+        
+        <p id="wish-text">Upar box par click karke dekhen aapke liye kya wish hai!</p>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+
+        <h3>Apna Naam Likh Kar Link Share Karen:</h3>
+        <br>
+        <input type="text" id="userName" placeholder="Apna Naam Likhen...">
+        <br>
+        <button onclick="generateLink()">Link Banayen</button>
+
+        <div class="share-section" id="shareSection">
+            <p style="color: green; font-weight: bold;">Aapka Link Tayyar Hai! 👇</p>
+            <input type="text" id="generatedLink" readonly style="width: 100%; margin-top: 10px;">
+            <br><br>
+            <button style="background-color: #25D366;" onclick="shareOnWhatsApp()">WhatsApp Par Share Karen</button>
+        </div>
+
+        <div class="ad-box" style="margin-top: 30px;">
+            [Aapka Google AdSense Code Yahan Aayega - Bottom Ad]
+        </div>
+    </div>
+
+    <script>
+        // Kuch random wishes
+        const wishes = [
+            "Allah aap ko lambi umar aur dheron khushiyan day! Ameen. 💖",
+            "May all your dreams come true this year! 🌟",
+            "Aap ko janamdin bohat bohat mubarak ho! 🥳",
+            "Hamesha hanste muskurate rahen! 🎈"
+        ];
+
+        function showWish() {
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            document.getElementById('wish-text').innerHTML = "<strong>" + randomWish + "</strong>";
+        }
+
+        function generateLink() {
+            const name = document.getElementById('userName').value;
+            if(name === "") {
+                alert("Pehle apna naam to likhen!");
+                return;
+            }
+            // Current URL hasil karne ke liye
+            const currentUrl = window.location.href.split('?')[0];
+            const finalUrl = currentUrl + "?sender=" + encodeURI(name);
+            
+            document.getElementById('generatedLink').value = finalUrl;
+            document.getElementById('shareSection').style.display = "block";
+        }
+
+        function shareOnWhatsApp() {
+            const link = document.getElementById('generatedLink').value;
+            const text = "Maine aapke liye ek special birthday wish bheji hai, dekhne ke liye is link par click karen: " + link;
+            window.open("https://wa.me/?text=" + encodeURIComponent(text));
+        }
+
+        // Agar link me kisi ka naam ho to welcome karna
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const senderName = urlParams.get('sender');
+            if(senderName) {
+                document.querySelector('h1').innerText = "🎉 " + decodeURI(senderName) + " Ne Aapko Birthday Wish Bheji Hai!";
+            }
+        }
+    </script>
+</body>
+  </html>
+  
